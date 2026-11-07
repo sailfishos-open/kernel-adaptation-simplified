@@ -262,6 +262,7 @@ else
         export DEVICEINFO_BOOTIMG_PARTITION_SIZE=%{deviceinfo_bootimg_partition_size}
         export DEVICEINFO_BOOTIMG_OS_VERSION=%{deviceinfo_bootimg_os_version}
         export DEVICEINFO_BOOTIMG_OS_PATCH_LEVEL=%{deviceinfo_bootimg_os_patch_level}
+        export DEVICEINFO_BOOTIMG_INCLUDE_RECOVERY=%{deviceinfo_bootimg_include_recovery}
         export DEVICEINFO_ROOTFS_IMAGE_SECTOR_SIZE=%{deviceinfo_rootfs_image_sector_size}
         export DEVICEINFO_HALIUM_VERSION=%{deviceinfo_halium_version}
         export DEVICEINFO_KERNEL_DISABLE_MODULES=%{deviceinfo_kernel_disable_modules}

@@ -72,10 +72,13 @@ if [ -d "$HERE/overlay/vendor-ramdisk-overlay" ]; then
         VENDOR_RAMDISK_ARGS=()
         if [ "$DEVICEINFO_BOOTIMG_HEADER_VERSION" -eq 3 ]; then
             VENDOR_RAMDISK_ARGS=(--vendor_ramdisk "$VENDOR_RAMDISK")
-        else
-            VENDOR_RAMDISK_ARGS=(--ramdisk_type platform --ramdisk_name '' --vendor_ramdisk_fragment "$VENDOR_RAMDISK")
+        else #header version 4
+            if [ "$DEVICEINFO_BOOTIMG_INCLUDE_RECOVERY" == "true" ] &&  [ -f "$HERE/ramdisk-recovery.img" ]; then
+				VENDOR_RAMDISK_ARGS=(--ramdisk_type platform --ramdisk_name 'boot_ramdisk' --vendor_ramdisk_fragment "$VENDOR_RAMDISK" --ramdisk_type recovery --ramdisk_name 'recovery_ramdisk' --vendor_ramdisk_fragment "$HERE/ramdisk-recovery.img")
+			else
+				VENDOR_RAMDISK_ARGS=(--ramdisk_type platform --ramdisk_name 'boot_ramdisk' --vendor_ramdisk_fragment "$VENDOR_RAMDISK")
+            fi
         fi
         $MKBOOTIMG "${VENDOR_RAMDISK_ARGS[@]}" --vendor_cmdline "$DEVICEINFO_KERNEL_CMDLINE" --header_version $DEVICEINFO_BOOTIMG_HEADER_VERSION --vendor_boot "vendor_boot.img" $EXTRA_VENDOR_ARGS
     fi
-
 fi
