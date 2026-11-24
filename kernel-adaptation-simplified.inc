@@ -315,6 +315,10 @@ done
 cp %{source_directory}/out/dtbo.img %{buildroot}/boot/ || true
 %endif
 
+%if 0%{?deviceinfo_prebuilt_dtbo:1}
+cp %{deviceinfo_prebuilt_dtbo} %{buildroot}/boot/ || true
+%endif
+
 # Build filelist
 find %{buildroot} -type f -empty -delete
 find %{buildroot} ! \( -type d \) | sed -e s,"%{buildroot}",,g> %{_tmpdir}/kernel-adaptation.files
